@@ -15,7 +15,12 @@ const jobSchema = mongoose.Schema(
       trim: true,
       required: [true, "Please provide a description"],
     },
-    location: {},
+
+    location: {
+      type: String,
+      trim: true,
+      required: [true, "Please provide the office's location"],
+    },
 
     type: {
       type: String,
@@ -51,22 +56,23 @@ const jobSchema = mongoose.Schema(
       required: [true, "Provide salary range"],
     },
 
-    hiringManage: {
-      name: {
-        type: String,
-        required: true,
-      },
+    datePosted: Date,
+    applicationDeadline: {
+      type: Date,
+      validate: [validator.isDate, "Please provide a valid date"],
+    },
+
+    hiringManagerInfo: {
       id: {
         type: ObjectId,
         ref: "User",
         required: true,
       },
-    },
-
-    datePosted: Date,
-    applicationDeadline: {
-      type: Date,
-      validate: [validator.isDate, "Please provide a valid date"],
+      email: {
+        type: String,
+        required: true,
+        validate: [validator.isEmail, "Provide a valid email"],
+      },
     },
   },
 
