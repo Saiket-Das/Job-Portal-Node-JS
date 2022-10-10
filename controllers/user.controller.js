@@ -6,7 +6,7 @@ const {
 } = require("../services/user.service");
 const { generateToken } = require("../utilis/token");
 
-//----------------> SIGN UP
+// ---------> SIGN UP
 exports.signup = async (req, res) => {
   try {
     const user = await signupService(req.body);
@@ -18,7 +18,6 @@ exports.signup = async (req, res) => {
       message: "Successfully signed up",
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       status: "Fail",
       message: " Internal server error",
@@ -27,7 +26,7 @@ exports.signup = async (req, res) => {
   }
 };
 
-//----------------> LOGIN
+// ---------> LOGIN
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -68,7 +67,6 @@ exports.login = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       status: "Fail",
       message: " Internal server error",
@@ -77,11 +75,9 @@ exports.login = async (req, res) => {
   }
 };
 
-//----------------> MAKE ADMIN
+// ---------> MAKE ADMIN
 exports.assignAdmin = async (req, res) => {
   try {
-    console.log(req.params.id);
-
     const reuslt = await assignAdminService(req.params.id);
 
     if (reuslt.modifiedCount > 0) {
@@ -100,7 +96,7 @@ exports.assignAdmin = async (req, res) => {
   }
 };
 
-//----------------> MAKE ADMIN
+// ---------> MAKE ADMIN
 exports.assignManager = async (req, res) => {
   try {
     console.log(req.params.id);

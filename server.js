@@ -13,13 +13,15 @@ app.use(express.json());
 dbConnection();
 
 const userRoutes = require("./routes/user.route");
+const jobRoutes = require("./routes/job.route");
+
+//------> Routes
+app.use("/api/users", userRoutes);
+app.use("/api/jobs", jobRoutes);
 
 app.get("/", (req, res) => {
   res.send("Job Portal is running");
 });
-
-// Routes
-app.use("/api/user", userRoutes);
 
 app.listen(port, function () {
   console.log(`Job Portal is running on ${port}`.white);

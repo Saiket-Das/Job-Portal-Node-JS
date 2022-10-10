@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const { ObjectId } = mongoose.Schema.Types;
 
 const jobSchema = mongoose.Schema(
   {
@@ -16,14 +17,9 @@ const jobSchema = mongoose.Schema(
       required: [true, "Please provide a description"],
     },
 
-    location: {
-      type: String,
-      trim: true,
-      required: [true, "Please provide the office's location"],
-    },
-
     type: {
       type: String,
+      lowercase: true,
       required: [true, "Provide job type"],
       enum: {
         values: ["full-time", "part-time"],
@@ -33,6 +29,7 @@ const jobSchema = mongoose.Schema(
 
     workMode: {
       type: String,
+      lowercase: true,
       required: [true, "Provide work model"],
       enum: {
         values: ["on-site", "remote", "hybrid "],
@@ -51,14 +48,22 @@ const jobSchema = mongoose.Schema(
       },
     },
 
+    location: {
+      type: String,
+      trim: true,
+      required: [true, "Please provide the office's location"],
+    },
+
     salaryRange: {
       type: String,
       required: [true, "Provide salary range"],
     },
 
     datePosted: Date,
+
     applicationDeadline: {
       type: Date,
+      required: [true, "Please provide a application deadline date"],
       validate: [validator.isDate, "Please provide a valid date"],
     },
 
