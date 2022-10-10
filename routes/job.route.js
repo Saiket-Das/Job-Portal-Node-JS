@@ -12,6 +12,13 @@ router
     jobController.createNewJob
   );
 
+router
+  .route("/:id")
+  .patch(
+    verifyToken,
+    authorization("hiring-manager"),
+    jobController.updateJobById
+  );
 // router
 //   .route("/assignManager/:id")
 //   .patch(verifyToken, authorization("admin"), jobController.assignManager);

@@ -32,7 +32,7 @@ const jobSchema = mongoose.Schema(
       lowercase: true,
       required: [true, "Provide work model"],
       enum: {
-        values: ["on-site", "remote", "hybrid "],
+        values: ["on-site", "remote", "hybrid"],
         message:
           "Work model value can't be {VALUE}, must be on-site/remote/hybrid",
       },
