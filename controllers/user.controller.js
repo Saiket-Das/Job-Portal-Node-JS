@@ -1,7 +1,8 @@
 const {
   signupService,
   findUserByEmail,
-  makeAdminService,
+  assignAdminService,
+  assignManagerService,
 } = require("../services/user.service");
 const { generateToken } = require("../utilis/token");
 
@@ -20,7 +21,7 @@ exports.signup = async (req, res) => {
     console.log(error);
     res.status(500).json({
       status: "Fail",
-      message: "Something went wrong",
+      message: " Internal server error",
       error: error.message,
     });
   }
@@ -70,50 +71,54 @@ exports.login = async (req, res) => {
     console.log(error);
     res.status(500).json({
       status: "Fail",
+      message: " Internal server error",
       error: error.message,
     });
   }
 };
 
 //----------------> MAKE ADMIN
-exports.makeAdmin = async (req, res) => {
+exports.assignAdmin = async (req, res) => {
   try {
     console.log(req.params.id);
-    //             const email = req.params.email;
-    //             const user = await usersCollection.findOne({ email: email })
-    //             const isAdmin = user.role === 'admin';
-    //             res.send({ admin: isAdmin })
 
-    // const email = req.params.email;
-    //             const filter = { email: email };
-    //             const updateDoc = {
-    //                 $set: { role: 'admin' },
-    //             };
-    //             const result = await usersCollection.updateOne(filter, updateDoc);
-    //             res.send(result)
-    //         })
-
-    const reuslt = await makeAdminService(req.params.id);
+    const reuslt = await assignAdminService(req.params.id);
 
     if (reuslt.modifiedCount > 0) {
       res.status(200).json({
         status: "Success",
-        message: "Successfully make an admin",
+        message: "Successfully assign an admin",
         data: reuslt,
       });
     }
   } catch (error) {
     res.status(500).json({
       status: "Fail",
+      message: " Internal server error",
       error: error.message,
     });
   }
 };
 
-// if (modifiedCount <= 0) {
-//   res.status(500).json({
-//     status: "Fail",
-//     message: "Already admin",
-//     error: error.message,
-//   });
-// }
+//----------------> MAKE ADMIN
+exports.assignManager = async (req, res) => {
+  try {
+    console.log(req.params.id);
+
+    const reuslt = await assignManagerService(req.params.id);
+
+    if (reuslt.modifiedCount > 0) {
+      res.status(200).json({
+        status: "Success",
+        message: "Successfully assign an hiring manager",
+        data: reuslt,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      status: "Fail",
+      message: " Internal server error",
+      error: error.message,
+    });
+  }
+};

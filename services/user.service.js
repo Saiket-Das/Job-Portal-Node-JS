@@ -11,10 +11,19 @@ exports.findUserByEmail = async (email) => {
   return user;
 };
 
-exports.makeAdminService = async (id) => {
+exports.assignAdminService = async (id) => {
   const result = await User.updateOne(
     { _id: id },
     { $set: { role: "admin" } },
+    { runValidators: true }
+  );
+  return result;
+};
+
+exports.assignManagerService = async (id) => {
+  const result = await User.updateOne(
+    { _id: id },
+    { $set: { role: "hiring-manager" } },
     { runValidators: true }
   );
   return result;

@@ -4,7 +4,8 @@ module.exports = (...role) => {
 
     if (!role.includes(userRole)) {
       return res.status(403).json({
-        status: "Fail",
+        status: "Forbidden",
+        message: "Fail",
         error: "You are not authorized to access this",
       });
     }

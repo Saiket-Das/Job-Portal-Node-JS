@@ -7,7 +7,8 @@ module.exports = async (req, res, next) => {
 
     if (!token) {
       return res.status(401).json({
-        status: "fail",
+        message: "Fail",
+        status: "you have not logged in at all",
         error: "You are not logged in",
       });
     }
@@ -18,9 +19,10 @@ module.exports = async (req, res, next) => {
 
     next();
   } catch (error) {
-    res.status(403).json({
-      status: "Fail",
-      messgae: "Invalid token",
+    res.status(498).json({
+      message: "Fail",
+      status: "Expired or Invalid token",
+      error: "You are not logged in",
     });
   }
 };
