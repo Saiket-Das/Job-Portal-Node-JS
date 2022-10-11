@@ -6,6 +6,7 @@ const authorization = require("../middlewares/authorization");
 
 router
   .route("/")
+  .get(jobController.getJobs)
   .post(
     verifyToken,
     authorization("hiring-manager"),

@@ -1,7 +1,54 @@
 const {
+  getJobsService,
   createNewJobService,
   updateJobByIdService,
 } = require("../services/job.service");
+
+// ---------> GET ALL JOB
+exports.getJobs = async (req, res) => {
+  try {
+    const filter = { ...req.query };
+    const excludeFields = ["sort", "page", "limit"];
+
+    // Deleting [Sort, Page, Limit] Queries
+    excludeFields.forEach((field) => delete filter[field]);
+
+    const queries = {};
+
+    // ----> SELETED FIELDS
+    if (req.query.fields) {
+      const fields = req.query.fields.split(",").join(" ");
+      queries.fields = fields;
+    }
+
+    // ----> SORT BY
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(",").join(" ");
+      queries.sortBy = sortBy;
+    }
+
+    // ----> PAGINATION
+    if (req.query.page) {
+      const { page = 1, limit = 2 } = req.query;
+      const skip = (page - 1) * parseInt(limit);
+      queries.skip = skip;
+      queries.limit = parseInt(limit);
+    }
+    const jobs = await getJobsService(filter, queries);
+
+    res.status(200).json({
+      status: "success",
+      message: "Successfully get all jobs",
+      data: jobs,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Fail",
+      message: " Internal server error",
+      error: error.message,
+    });
+  }
+};
 
 // ---------> CREATE A NEW JOB
 exports.createNewJob = async (req, res) => {

@@ -1,5 +1,16 @@
 const Job = require("../models/job.model");
 
+exports.getJobsService = async (filter, queries) => {
+  const result = await Job.find(filter)
+    .select(queries.fields)
+    .sort(queries.sortBy)
+    .skip(queries.skip)
+    .limit(queries.limit);
+  const jobs = await Job.countDocuments(filter);
+  const pageCount = Math.ceil(Job / queries.limit);
+  return { result, pageCount, jobs };
+};
+
 exports.createNewJobService = async (jobInfo) => {
   const job = await Job.create(jobInfo);
   return job;
