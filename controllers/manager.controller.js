@@ -5,7 +5,6 @@ const {
 // ---------> GET ALL JOBS OF A MANAGER
 exports.getManagerSpecificJobs = async (req, res) => {
   try {
-    console.log(req.user);
     const job = await getManagerSpecificJobsService(req.user.id);
 
     res.status(200).json({

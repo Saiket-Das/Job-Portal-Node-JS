@@ -3,6 +3,7 @@ const {
   findUserByEmail,
   assignAdminService,
   assignManagerService,
+  getMeService,
 } = require("../services/user.service");
 const { generateToken } = require("../utilis/token");
 
@@ -110,6 +111,25 @@ exports.assignManager = async (req, res) => {
         data: reuslt,
       });
     }
+  } catch (error) {
+    res.status(500).json({
+      status: "Fail",
+      message: " Internal server error",
+      error: error.message,
+    });
+  }
+};
+
+// ---------> GET LOGGED IN USER INFORMATION BY TOKEN
+exports.getMe = async (req, res) => {
+  try {
+    const user = await getMeService(req.user.id);
+
+    res.status(200).json({
+      status: "Success",
+      message: "Successfully get user's information",
+      data: user,
+    });
   } catch (error) {
     res.status(500).json({
       status: "Fail",

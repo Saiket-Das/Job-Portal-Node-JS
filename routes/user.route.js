@@ -15,6 +15,6 @@ router
   .route("/assignManager/:id")
   .patch(verifyToken, authorization("admin"), userController.assignManager);
 
-// router.get("/me", verifyToken, userController.getMe);
+router.get("/me", verifyToken, userController.getMe);
 
 module.exports = router;

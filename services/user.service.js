@@ -27,3 +27,9 @@ exports.assignManagerService = async (id) => {
   );
   return result;
 };
+
+exports.getMeService = async (userId) => {
+  console.log(userId);
+  const result = await User.findById(userId);
+  return result;
+};
