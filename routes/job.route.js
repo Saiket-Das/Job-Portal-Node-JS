@@ -19,9 +19,6 @@ router
     authorization("hiring-manager"),
     jobController.updateJobById
   );
-// router
-//   .route("/assignManager/:id")
-//   .patch(verifyToken, authorization("admin"), jobController.assignManager);
 
 // router.get("/me", verifyToken, jobController.getMe);
 
