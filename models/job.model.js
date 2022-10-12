@@ -59,12 +59,34 @@ const jobSchema = mongoose.Schema(
       required: [true, "Provide salary range"],
     },
 
+    companyInfo: {
+      companyName: {
+        type: String,
+        trim: true,
+        required: [true, "Company name is required"],
+        minLength: [3, "Title must be at least 3 characters"],
+      },
+      websiteURL: {
+        type: String,
+        validate: [
+          validator.isURL,
+          "Please provide a valid url of your company",
+        ],
+      },
+    },
+
     datePosted: Date,
 
     applicationDeadline: {
       type: Date,
-      required: [true, "Please provide a application deadline date"],
       validate: [validator.isDate, "Please provide a valid date"],
+      default: () => {
+        const date = new Date();
+        date.setDate(
+          date.getDate() + Math.floor(Math.random() * (7 - 1 + 1) + 1)
+        );
+        return date;
+      },
     },
 
     hiringManagerInfo: {
