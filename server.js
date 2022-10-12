@@ -17,9 +17,9 @@ const jobRoutes = require("./routes/job.route");
 const managerRoutes = require("./routes/manager.route");
 
 //------> Routes
-app.use("/api/user", userRoutes);
-app.use("/api/jobs", jobRoutes);
-app.use("/api/manager", managerRoutes);
+app.use("/user", userRoutes);
+app.use("/jobs", jobRoutes);
+app.use("/manager", managerRoutes);
 
 app.get("/", (req, res) => {
   res.send("Job Portal is running");

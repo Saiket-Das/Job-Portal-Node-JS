@@ -21,6 +21,4 @@ router
     jobController.updateJobById
   );
 
-// router.get("/me", verifyToken, jobController.getMe);
-
 module.exports = router;

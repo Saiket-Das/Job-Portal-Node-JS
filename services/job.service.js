@@ -8,7 +8,7 @@ exports.getJobsService = async (filter, queries) => {
     .limit(queries.limit);
   const jobs = await Job.countDocuments(filter);
   const pageCount = Math.ceil(Job / queries.limit);
-  return { result, pageCount, jobs };
+  return { pageCount, jobs, result };
 };
 
 exports.createNewJobService = async (jobInfo) => {
