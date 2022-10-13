@@ -53,13 +53,33 @@ exports.updateJobByIdService = async (
 };
 
 // ---------> APPLY FOR A JOB
-exports.applyForAJobService = async (jobId, applyDetails) => {
+exports.applyForAJobService = async (userId, jobId, applyDetails) => {
   const job = await Job.findById(jobId);
+
+  if (!job) {
+    return {
+      status: "Fail",
+      message: "Can'find any job with this Id",
+    };
+  }
+
   const expired = new Date() > new Date(job.applicationDeadline);
   if (expired) {
     return {
       status: "Fail",
       message: "Deadline over",
+    };
+  }
+
+  const applyExist = await Apply.find({ "candidateInfo.id": userId });
+
+  if (
+    applyExist[0]?.jobInfo?.id == jobId &&
+    applyExist[0]?.candidateInfo?.id == userId
+  ) {
+    return {
+      status: "Fail",
+      message: "You already applied for this job.",
     };
   }
 

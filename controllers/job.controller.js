@@ -117,7 +117,7 @@ exports.updateJobById = async (req, res) => {
 // ---------> APPLY FOR A JOB
 exports.applyForAJob = async (req, res) => {
   try {
-    const job = await applyForAJobService(req.params.id, req.body);
+    const job = await applyForAJobService(req.user.id, req.params.id, req.body);
 
     res.status(200).json({
       status: "Success",
