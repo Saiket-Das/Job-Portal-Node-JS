@@ -1,4 +1,3 @@
-const Apply = require("../models/apply.model");
 const Job = require("../models/job.model");
 
 // ---------> GET ALL JOB
