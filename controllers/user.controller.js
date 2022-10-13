@@ -100,8 +100,6 @@ exports.assignAdmin = async (req, res) => {
 // ---------> MAKE ADMIN
 exports.assignManager = async (req, res) => {
   try {
-    console.log(req.params.id);
-
     const reuslt = await assignManagerService(req.params.id);
 
     if (reuslt.modifiedCount > 0) {
