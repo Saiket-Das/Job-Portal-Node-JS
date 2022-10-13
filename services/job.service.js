@@ -53,7 +53,13 @@ exports.updateJobByIdService = async (
 };
 
 // ---------> HIGHEST PAYING JOBS
-exports.highestPayingervice = async () => {
-  const result = await Job.find({}).sort({ salaryRange: 1 }).limit(2);
+exports.highestPayingService = async () => {
+  const result = await Job.find({}).sort({ salaryRange: 1 }).limit(3);
+  return result;
+};
+
+// ---------> LOWEST PAYING JOBS
+exports.lowestPayingService = async () => {
+  const result = await Job.find({}).sort({ salaryRange: -1 }).limit(3);
   return result;
 };

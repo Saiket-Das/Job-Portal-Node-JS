@@ -27,5 +27,6 @@ router
   .post(verifyToken, authorization("candidate"), jobController.applyForAJob); // Apply for a job
 
 router.route("/paying/highest").get(jobController.highestPaying); // Highest paying job
+router.route("/paying/lowest").get(jobController.lowestPaying); // Lowest paying job
 
 module.exports = router;

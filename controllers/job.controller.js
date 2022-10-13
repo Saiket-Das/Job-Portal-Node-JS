@@ -4,7 +4,8 @@ const {
   updateJobByIdService,
   getJobByIdService,
   applyForAJobService,
-  highestPayingervice,
+  highestPayingService,
+  lowestPayingService,
 } = require("../services/job.service");
 
 // ---------> GET ALL JOB
@@ -137,7 +138,26 @@ exports.applyForAJob = async (req, res) => {
 // ---------> HIGHEST PAYING JOBS
 exports.highestPaying = async (req, res) => {
   try {
-    const job = await highestPayingervice();
+    const job = await highestPayingService();
+
+    res.status(200).json({
+      status: "Success",
+      message: "Top 3 highest paying jobs",
+      data: job,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Fail",
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+
+// ---------> HIGHEST PAYING JOBS
+exports.lowestPaying = async (req, res) => {
+  try {
+    const job = await lowestPayingService();
 
     res.status(200).json({
       status: "Success",
