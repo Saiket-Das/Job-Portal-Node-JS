@@ -3,6 +3,7 @@ const {
   createNewJobService,
   updateJobByIdService,
   getJobByIdService,
+  applyForAJobService,
 } = require("../services/job.service");
 
 // ---------> GET ALL JOB
@@ -102,6 +103,25 @@ exports.updateJobById = async (req, res) => {
     res.status(200).json({
       status: "Success",
       message: "Successfully update a job",
+      data: job,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Fail",
+      message: " Internal server error",
+      error: error.message,
+    });
+  }
+};
+
+// ---------> APPLY FOR A JOB
+exports.applyForAJob = async (req, res) => {
+  try {
+    const job = await applyForAJobService(req.params.id, req.body);
+
+    res.status(200).json({
+      status: "Success",
+      message: "Your application under review. Thanks for apply",
       data: job,
     });
   } catch (error) {

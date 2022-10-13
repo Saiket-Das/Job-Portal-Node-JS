@@ -97,6 +97,7 @@ const jobSchema = mongoose.Schema(
       },
       email: {
         type: String,
+        ref: "User",
         required: true,
         validate: [validator.isEmail, "Provide a valid email"],
       },

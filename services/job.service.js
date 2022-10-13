@@ -1,3 +1,4 @@
+const Apply = require("../models/apply.model");
 const Job = require("../models/job.model");
 
 // ---------> GET ALL JOB
@@ -49,4 +50,20 @@ exports.updateJobByIdService = async (
     }
   );
   return job;
+};
+
+// ---------> APPLY FOR A JOB
+exports.applyForAJobService = async (jobId, applyDetails) => {
+  const job = await Job.findById(jobId);
+  const expired = new Date() > new Date(job.applicationDeadline);
+  if (expired) {
+    return {
+      status: "Fail",
+      message: "Deadline over",
+    };
+  }
+
+  const apply = await Apply.create(applyDetails);
+
+  return apply;
 };

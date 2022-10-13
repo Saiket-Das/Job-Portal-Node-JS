@@ -10,13 +10,20 @@ router
   .post(
     verifyToken,
     authorization("hiring-manager"),
-    jobController.createNewJob //Post a New Job
+    jobController.createNewJob // Post a New Job
   );
 
-router.route("/:id").get(jobController.getJobById).patch(
-  verifyToken,
-  authorization("hiring-manager"),
-  jobController.updateJobById //Update a job
-);
+router
+  .route("/:id")
+  .get(jobController.getJobById) // Get a Job by Id
+  .patch(
+    verifyToken,
+    authorization("hiring-manager"),
+    jobController.updateJobById // Update a job
+  );
+
+router
+  .route("/:id/apply")
+  .post(verifyToken, authorization("candidate"), jobController.applyForAJob); // Apply for a job
 
 module.exports = router;

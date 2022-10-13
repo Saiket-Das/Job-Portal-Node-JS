@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const { ObjectId } = mongoose.Schema.Types;
 
 const applySchema = mongoose.Schema(
   {
@@ -12,7 +13,6 @@ const applySchema = mongoose.Schema(
       title: {
         type: String,
         required: true,
-        validate: [validator.isEmail, "Provide a valid email"],
       },
     },
 
@@ -33,11 +33,9 @@ const applySchema = mongoose.Schema(
       {
         type: String,
         required: true,
-        validate: [valid.isURL, "Wrong url"],
+        validate: [validator.isURL, "Wrong url"],
       },
     ],
-
-    submissionDate: Date,
   },
 
   {
