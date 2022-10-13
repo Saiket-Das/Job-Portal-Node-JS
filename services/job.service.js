@@ -1,5 +1,6 @@
 const Job = require("../models/job.model");
 
+// ---------> GET ALL JOB
 exports.getJobsService = async (filter, queries) => {
   const result = await Job.find(filter)
     .select(queries.fields)
@@ -11,11 +12,19 @@ exports.getJobsService = async (filter, queries) => {
   return { pageCount, jobs, result };
 };
 
+// ---------> GET A JOB BY ID
+exports.getJobByIdService = async (jobId) => {
+  const result = await Job.findById(jobId).populate("hiringManagerInfo");
+  return result;
+};
+
+// ---------> CREATE A NEW JOB
 exports.createNewJobService = async (jobInfo) => {
   const job = await Job.create(jobInfo);
   return job;
 };
 
+// ---------> UPDATE A SPECIFIC JOB
 exports.updateJobByIdService = async (
   managerEmail,
   jobId,

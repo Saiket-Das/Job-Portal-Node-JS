@@ -2,6 +2,7 @@ const {
   getJobsService,
   createNewJobService,
   updateJobByIdService,
+  getJobByIdService,
 } = require("../services/job.service");
 
 // ---------> GET ALL JOB
@@ -35,6 +36,25 @@ exports.getJobs = async (req, res) => {
       queries.limit = parseInt(limit);
     }
     const jobs = await getJobsService(filter, queries);
+
+    res.status(200).json({
+      status: "success",
+      message: "Successfully get all jobs",
+      data: jobs,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Fail",
+      message: " Internal server error",
+      error: error.message,
+    });
+  }
+};
+
+// ---------> GET A JOB BY ID
+exports.getJobById = async (req, res) => {
+  try {
+    const jobs = await getJobByIdService(req.params.id);
 
     res.status(200).json({
       status: "success",

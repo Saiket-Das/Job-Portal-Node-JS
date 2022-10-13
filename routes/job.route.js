@@ -6,19 +6,17 @@ const authorization = require("../middlewares/authorization");
 
 router
   .route("/")
-  .get(jobController.getJobs)
+  .get(jobController.getJobs) // Get all Jobs
   .post(
     verifyToken,
     authorization("hiring-manager"),
-    jobController.createNewJob
+    jobController.createNewJob //Post a New Job
   );
 
-router
-  .route("/:id")
-  .patch(
-    verifyToken,
-    authorization("hiring-manager"),
-    jobController.updateJobById
-  );
+router.route("/:id").get(jobController.getJobById).patch(
+  verifyToken,
+  authorization("hiring-manager"),
+  jobController.updateJobById //Update a job
+);
 
 module.exports = router;
