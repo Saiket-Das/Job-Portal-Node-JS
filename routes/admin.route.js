@@ -12,8 +12,12 @@ router
   .route("/managers")
   .get(verifyToken, authorization("admin"), adminController.getAllManagers);
 
-//   router
-//   .route("/candidate/:id")
-//   .get(verifyToken, authorization("admin"), adminController.getCand);
+router
+  .route("/candidate/:id")
+  .get(
+    verifyToken,
+    authorization("admin"),
+    adminController.getCandidateDeatilsById
+  );
 
 module.exports = router;
