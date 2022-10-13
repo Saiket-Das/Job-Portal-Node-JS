@@ -4,6 +4,7 @@ const {
   updateJobByIdService,
   getJobByIdService,
   applyForAJobService,
+  highestPayingervice,
 } = require("../services/job.service");
 
 // ---------> GET ALL JOB
@@ -46,7 +47,7 @@ exports.getJobs = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       status: "Fail",
-      message: " Internal server error",
+      message: "Internal server error",
       error: error.message,
     });
   }
@@ -65,7 +66,7 @@ exports.getJobById = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       status: "Fail",
-      message: " Internal server error",
+      message: "Internal server error",
       error: error.message,
     });
   }
@@ -84,7 +85,7 @@ exports.createNewJob = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       status: "Fail",
-      message: " Internal server error",
+      message: "Internal server error",
       error: error.message,
     });
   }
@@ -127,7 +128,26 @@ exports.applyForAJob = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       status: "Fail",
-      message: " Internal server error",
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+
+// ---------> HIGHEST PAYING JOBS
+exports.highestPaying = async (req, res) => {
+  try {
+    const job = await highestPayingervice();
+
+    res.status(200).json({
+      status: "Success",
+      message: "Top 3 highest paying jobs",
+      data: job,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Fail",
+      message: "Internal server error",
       error: error.message,
     });
   }

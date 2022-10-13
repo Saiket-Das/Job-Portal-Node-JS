@@ -55,7 +55,7 @@ const jobSchema = mongoose.Schema(
     },
 
     salaryRange: {
-      type: String,
+      type: Number,
       required: [true, "Provide salary range"],
     },
 

@@ -26,4 +26,6 @@ router
   .route("/:id/apply")
   .post(verifyToken, authorization("candidate"), jobController.applyForAJob); // Apply for a job
 
+router.route("/paying/highest").get(jobController.highestPaying); // Highest paying job
+
 module.exports = router;
