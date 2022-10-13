@@ -6,12 +6,14 @@ const authorization = require("../middlewares/authorization");
 
 router
   .route("/candidates")
-  .patch(verifyToken, authorization("admin"), adminController.getAllCandidates);
+  .get(verifyToken, authorization("admin"), adminController.getAllCandidates);
 
-// router
-//   .route("/assignManager/:id")
-//   .patch(verifyToken, authorization("admin"), userController.assignManager);
+router
+  .route("/managers")
+  .get(verifyToken, authorization("admin"), adminController.getAllManagers);
 
-// router.get("/me", verifyToken, userController.getMe);
+//   router
+//   .route("/candidate/:id")
+//   .get(verifyToken, authorization("admin"), adminController.getCand);
 
 module.exports = router;
