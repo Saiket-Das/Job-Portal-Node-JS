@@ -16,3 +16,6 @@
 
 ### Admin email 
 Email: admin@gmail.com || Pass: Admin123#
+
+### Api documentation link
+_https://documenter.getpostman.com/view/21582491/2sA3BkcYsZ_
